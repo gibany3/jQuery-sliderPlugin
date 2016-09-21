@@ -1,0 +1,28 @@
+// Breakpoints
+@mixin breakpoint($breakpoint, $media: screen) {
+     @if $breakpoint == large-mobile{
+        @media only #{$media} and (max-width: $large-mobile) {
+             @content;
+        }
+    }
+    @else if $breakpoint == tablet {
+         @media only #{$media} and (max-width: $tablet){
+            @content;
+        }
+    }
+    @else if $breakpoint == horizontal {
+         @media only #{$media} and (orientation: landscape) and (max-width: $tablet){
+            @content;
+        }
+    }
+    @else if $breakpoint == desktop {
+         @media only #{$media} and (max-width: $desktop){
+            @content;
+        }
+    }
+    @else if $breakpoint == large-desktop {
+         @media only #{$media} and (max-width: $large-desktop){
+            @content;
+        }
+    }
+}
