@@ -16,7 +16,8 @@ gulp.task('sass', function() {
 gulp.task('browser_sync', function (){
   var files = [
       '*.html',
-      'css/*.css'
+      'css/*.css',
+      'js/*.js'
   ];
   browser_sync.init(files, {
       server: {
