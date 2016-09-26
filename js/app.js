@@ -13,15 +13,18 @@
         return this.each(function() {
 
             var $t = $(this);
-            var $ul = $t.find('ul');
+
+            var $ul = $t.find('ul.imgSlide');
             var $li = $ul.find('li');
             var item_width = $li.first().outerWidth(true);
             var $prev = $t.find('.prev');
             var $next = $t.find('.next');
             var interval = null;
 
+            //picture caption
+            var $ulCaption = $t.find('ul.imgCaption');
+            var $liCaption = $ulCaption.find('li');
 
-            console.log(options.displayLi);
 
             switch (options.displayLi) {
                 case 1:
@@ -52,6 +55,15 @@
                     $ul.animate({'margin-left' : 0}, options.animationTime, function(){
                         options.onScroll();
                     });
+
+                    //Caption img
+                    var $liCaption = $ulCaption.find('li');
+                    $ulCaption.css('margin-left',-item_width);
+                    $liCaption.first().before($liCaption.last());
+                    $ulCaption.animate({'margin-left' : 0}, options.animationTime, function(){
+                        options.onScroll();
+                    });
+
                     clearInterval(interval);
                     if (options.auto) {
                         interval = setTimeout(function() {
@@ -63,12 +75,20 @@
 
             var scrollNext = function() {
                 var $li = $ul.find('li');
-
                 $ul.not(':animated').animate({'margin-left' : -item_width}, options.animationTime, function(){
                     $li.last().after($li.first());
                     $ul.css({'margin-left' : 0});
                     options.onScroll();
                 });
+
+                //Caption img
+                var $liCaption = $ulCaption.find('li');
+                $ulCaption.not(':animated').animate({'margin-left' : -item_width}, options.animationTime, function(){
+                    $liCaption.last().after($liCaption.first());
+                    $ulCaption.css({'margin-left' : 0});
+                    options.onScroll();
+                });
+
                 clearInterval(interval);
                 if (options.auto) {
                     interval = setTimeout(function() {
