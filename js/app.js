@@ -4,10 +4,10 @@
             displayLi      : 3,
             animationTime  : 700,
             pauseTime      : 3000,
+            caption        : true,
             auto            : true,
             onScroll        : function() {}
         }, options);
-
 
 
         return this.each(function() {
@@ -26,6 +26,12 @@
             var $liCaption = $ulCaption.find('li');
 
 
+            //Display caption
+            if (!options.caption) {
+                $ulCaption.parent().css('display', 'none')
+            }
+
+            //Display images with caption
             switch (options.displayLi) {
                 case 1:
                     $t.css('width', '230')
